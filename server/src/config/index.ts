@@ -10,3 +10,5 @@ export const smtpHost: string = process.env.SMTP_HOST || "smtp.example.com";
 export const smtpPort: number = Number(process.env.SMTP_PORT) || 587;
 export const smtpUser: string = process.env.SMTP_USER || "username";
 export const smtpPass: string = process.env.SMTP_PASS || "password";
+
+export const jwtSecret: string = process.env.JWT_SECRET!;

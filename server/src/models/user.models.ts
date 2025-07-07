@@ -1,10 +1,9 @@
 import mongoose, { Document, Model } from "mongoose";
 import { IUser } from "../types";
-import { Schema } from "mongoose";
 
 interface IUserDocument extends IUser, Document {}
 
-const userSchema = new Schema<IUserDocument, Model<IUserDocument>>({
+const userSchema = new mongoose.Schema<IUserDocument, Model<IUserDocument>>({
   name: {
     type: String,
     required: true,

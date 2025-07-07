@@ -7,6 +7,7 @@ import globalErrorHandler from "./middleware/errorHandler";
 import mainRouter from "./routes/index";
 import AppError from "./utils/appError";
 import { dbConnection } from "./db";
+import cookieParser from "cookie-parser"
 
 export const app = express();
 
@@ -16,6 +17,7 @@ if (nodeEnv === "development") app.use(morgan("dev"));
 // Parse JSON bodies (limit size to prevent DOS via large payloads)
 app.use(express.json({ limit: "10kb" }));
 app.use(cors());
+app.use(cookieParser());
 
 app.use(
   "/api",

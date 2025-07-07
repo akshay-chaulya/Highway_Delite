@@ -2,6 +2,8 @@ import { Response, Request } from "express";
 import * as AuthService from "../services/auth.service";
 import { StatusCodes } from "http-status-codes";
 import catchAsync from "../utils/catchAsync";
+import { getJwtToken } from "../utils/jwt";
+import { nodeEnv } from "../config";
 
 export const requestSignupOtp = catchAsync(
   async (req: Request, res: Response) => {
@@ -15,8 +17,27 @@ export const verifySignupOtp = catchAsync(
   async (req: Request, res: Response) => {
     const { name, email, dob, otp } = req.body;
     const user = await AuthService.verifyUser(email, otp, new Date(dob), name);
-    // once verified, issue JWT or session cookie here...
-    res.status(StatusCodes.OK).json({ message: "Signup successful", user });
+    if (!user) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: "Invalid OTP" });
+    }
+    const token = getJwtToken({
+      id: user._id as string,
+      email: user.email,
+      name: user.name,
+    });
+
+    res.cookie("jwt", `Bearer ${token}`, {
+      httpOnly: true,
+      secure: nodeEnv === "production",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      sameSite: nodeEnv === "production" ? "strict" : "lax",
+    });
+
+    res
+      .status(StatusCodes.OK)
+      .json({ message: "Signup successful", user, token });
   }
 );
 
@@ -32,7 +53,23 @@ export const verifyLoginOtp = catchAsync(
   async (req: Request, res: Response) => {
     const { email, otp } = req.body;
     const user = await AuthService.verifyUser(email, otp);
-    // once verified, issue JWT or session cookie here...
-    res.status(StatusCodes.OK).json({ message: "Login successful", user });
+    if (!user) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: "Invalid OTP" });
+    }
+    console.log("User logged in:", user);
+    const token = getJwtToken({
+      id: user._id as string,
+      email: user.email,
+      name: user.name,
+    });
+    res.cookie("jwt", `Bearer ${token}`, {
+      httpOnly: true,
+      secure: nodeEnv === "production",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      sameSite: nodeEnv === "production" ? "strict" : "lax",
+    });
+    res.status(StatusCodes.OK).json({ message: "Login successful", user, token });
   }
 );

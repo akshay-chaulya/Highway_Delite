@@ -31,7 +31,7 @@ export const verifyUser = async (email: string, otp: string, dob?: Date, name?: 
   if (!user) throw new AppError("User not found", StatusCodes.NOT_FOUND);
 
   if (!user.otp || !user.otpExpires) {
-    throw new AppError("OTP not requested or already used", StatusCodes.BAD_REQUEST);
+    throw new AppError("OTP not found or has expired. Please request a new OTP.", StatusCodes.BAD_REQUEST);
   }
 
   if (user.otp !== otp || user.otpExpires < new Date()) {
