@@ -11,7 +11,7 @@ export const createNote = catchAsync(async (req: Request, res: Response) => {
       message: "Title and content are required to create a note.",
     });
   }
-  console.log(req.user)
+  console.log(req.user);
   const note = await NoteService.createNoteService(
     req.body,
     req.user as JWTUser
@@ -56,8 +56,6 @@ export const getAllNotes = catchAsync(async (req: Request, res: Response) => {
   res.status(StatusCodes.OK).json({
     status: "success",
     message: "Notes fetched successfully",
-    data: {
-      notes,
-    },
+    data: notes,
   });
 });

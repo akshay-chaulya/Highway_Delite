@@ -1,8 +1,8 @@
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
 import express, { Request, Response, NextFunction } from "express";
 import rateLimit from "express-rate-limit";
 import morgan from "morgan";
-import { nodeEnv, port } from "./config";
+import { allowedOrigins, nodeEnv, port } from "./config";
 import globalErrorHandler from "./middleware/errorHandler";
 import mainRouter from "./routes/index";
 import AppError from "./utils/appError";
@@ -16,8 +16,21 @@ if (nodeEnv === "development") app.use(morgan("dev"));
 
 // Parse JSON bodies (limit size to prevent DOS via large payloads)
 app.use(express.json({ limit: "10kb" }));
-app.use(cors());
 app.use(cookieParser());
+
+const corsOptions: CorsOptions = {
+  origin: (origin: string | undefined, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error("Not allowed by CORS")); // Block the request
+    }
+  },
+  credentials: true, // Allow cookies, auth headers, etc.
+};
+
+// Step 3: Use CORS with options
+app.use(cors(corsOptions));
 
 app.use(
   "/api",

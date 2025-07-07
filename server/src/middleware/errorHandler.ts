@@ -13,6 +13,20 @@ const globalErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  if (err.name === "TokenExpiredError") {
+    err.statusCode = 401;
+    err.status = "fail";
+    err.message = "Your session has expired. Please log in again.";
+    err.isOperational = true;
+  }
+  if (err.name === "JsonWebTokenError") {
+    err.statusCode = 401;
+    err.status = "fail";
+    err.message = "Invalid token. Please log in again.";
+    err.isOperational = true;
+  }
+  // Add more custom error handling as needed
+
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 

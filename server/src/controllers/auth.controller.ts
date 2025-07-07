@@ -37,7 +37,7 @@ export const verifySignupOtp = catchAsync(
 
     res
       .status(StatusCodes.OK)
-      .json({ message: "Signup successful", user, token });
+      .json({ message: "Signup successful", data: user, token });
   }
 );
 
@@ -70,6 +70,6 @@ export const verifyLoginOtp = catchAsync(
       maxAge: 24 * 60 * 60 * 1000, // 1 day
       sameSite: nodeEnv === "production" ? "strict" : "lax",
     });
-    res.status(StatusCodes.OK).json({ message: "Login successful", user, token });
+    res.status(StatusCodes.OK).json({ message: "Login successful", data: user, token });
   }
 );
