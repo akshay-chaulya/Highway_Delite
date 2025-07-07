@@ -1,0 +1,26 @@
+# Node
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Ignore PDF files
+*.pdf
