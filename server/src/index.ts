@@ -19,7 +19,7 @@ app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
 
 const corsOptions: CorsOptions = {
-  origin: (origin: string | undefined, callback) => {
+  origin: (origin: string | undefined, callback: any) => {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true); // Allow the request
     } else {

@@ -10,7 +10,7 @@ export const transporter = nodemailer.createTransport({
 //   debug: true,
 });
 
-transporter.verify((err) => {
+transporter.verify((err: any) => {
   if (err) {
     console.error("❌ SMTP verification failed:", err);
     process.exit(1);
