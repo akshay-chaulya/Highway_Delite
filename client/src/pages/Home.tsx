@@ -1,10 +1,8 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { IoTrashOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import { api } from "../service";
 import { useSelector } from "react-redux";
 import type { RootState } from "../app/store";
+import { api } from "../service";
 
 interface Note {
   _id: string;
@@ -21,7 +19,6 @@ export default function Home() {
     open: false,
   });
   const [newNote, setNewNote] = useState({ title: "", content: "" });
-  const navigate = useNavigate();
 
   const fetchNotes = async () => {
     setLoading(true);
@@ -66,10 +63,10 @@ export default function Home() {
     }
   };
 
-  const signOut = () => {
-    // your sign out logic...
-    navigate("/login");
-  };
+  // const signOut = () => {
+  //   // your sign out logic...
+  //   navigate("/login");
+  // };
 
   return (
     <div className="min-h-screen bg-gray-50">

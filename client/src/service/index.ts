@@ -1,5 +1,4 @@
 import axios from "axios";
-import { store } from '../app/store'; // adjust path as needed
 // import { logout } from '../features/userSlice'; // adjust path as needed
 
 export const api = axios.create({

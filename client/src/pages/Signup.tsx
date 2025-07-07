@@ -1,12 +1,11 @@
-import React, { useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   requestSignupOtp,
   verifySignupOtp,
 } from "../app/features/auth/authThunk";
-import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import Header from "../components/Header";
 
 export default function Signup() {
   const [name, setName] = useState("");
