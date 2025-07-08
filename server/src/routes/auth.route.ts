@@ -9,5 +9,6 @@ router.post("/signup", validate(SignupOtpRequestSchema), AuthController.requestS
 router.post("/signup/verify", validate(SignupOtpVerifySchema), AuthController.verifySignupOtp);
 router.post("/login", validate(LoginOtpRequestSchema), AuthController.requestLoginOtp);
 router.post("/login/verify", validate(LoginOtpVerifySchema), AuthController.verifyLoginOtp);
+router.post("/logout", AuthController.logout);
 
 export default router;

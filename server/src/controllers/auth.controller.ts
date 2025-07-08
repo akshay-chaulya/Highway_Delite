@@ -73,3 +73,8 @@ export const verifyLoginOtp = catchAsync(
     res.status(StatusCodes.OK).json({ message: "Login successful", data: user, token });
   }
 );
+
+export const logout = catchAsync(async (req: Request, res: Response) => {
+  res.clearCookie("jwt");
+  res.status(StatusCodes.OK).json({ message: "Logout successful" });
+});

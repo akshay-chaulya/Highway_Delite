@@ -4,7 +4,7 @@ import { verifyLoginOtp, verifySignupOtp } from "./authThunk";
 export interface User {
   name: string;
   email: string;
-  dob: string;
+  dob: Date | null;
   token?: string;
   // add other user fields as needed
 }
@@ -26,7 +26,14 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.error = null;
+      localStorage.removeItem('token');
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(verifySignupOtp.pending, (state) => {
