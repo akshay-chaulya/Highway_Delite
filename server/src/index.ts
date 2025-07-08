@@ -30,7 +30,7 @@ const corsOptions: CorsOptions = {
 };
 
 // console allow multiple origins
-console.log("Allowed Origins:", allowedOrigins);
+console.log("Allowed Origins: ", allowedOrigins);
 
 // Step 3: Use CORS with options
 app.use(cors(corsOptions));
