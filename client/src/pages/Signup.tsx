@@ -74,7 +74,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
+    <div className="min-h-screen bg-white flex items-center justify-center py-8 md:py-0">
       <div className="w-full max-w-full h-screen bg-white lg:flex">
         <div className="w-full flex flex-col justify-center">
           <Logo />

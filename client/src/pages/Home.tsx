@@ -81,7 +81,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 py-4 md:py-0">
       <main className="max-w-md mx-auto mt-8 space-y-6">
         {/* Header  */}
         <div className="w-full flex items-start justify-between py-2">
