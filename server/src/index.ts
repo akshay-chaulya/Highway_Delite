@@ -29,6 +29,9 @@ const corsOptions: CorsOptions = {
   credentials: true, // Allow cookies, auth headers, etc.
 };
 
+// console allow multiple origins
+console.log("Allowed Origins:", allowedOrigins);
+
 // Step 3: Use CORS with options
 app.use(cors(corsOptions));
 
