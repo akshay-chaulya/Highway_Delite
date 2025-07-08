@@ -69,7 +69,7 @@ export default function Home() {
     }
   };
 
-  const signOut = async() => {
+  const signOut = async () => {
     try {
       await api.post("/auth/logout");
       dispatch(authActions.logout());
@@ -91,7 +91,10 @@ export default function Home() {
 
           <h1 className="text-xl font-medium text-[#232323]">Dashboard</h1>
 
-          <button onClick={signOut} className="text-[#367AFF] text-sm font-semibold underline cursor-pointer hover:scale-[1.02] transition">
+          <button
+            onClick={signOut}
+            className="text-[#367AFF] text-sm font-semibold underline cursor-pointer hover:scale-[1.02] transition"
+          >
             Sign Out
           </button>
         </div>
@@ -116,27 +119,31 @@ export default function Home() {
         <div className="space-y-4">
           <h1 className="text-xl font-medium text-[#232323]">Notes</h1>
           <div className="max-h-[200px] overflow-y-scroll p-4 space-y-4">
-            {loading
-              ? "Loading..."
-              : notes.map((note) => (
-                  <div
-                    key={note._id}
-                    className="bg-white rounded-xl shadow-md p-4 flex justify-between items-center"
-                  >
-                    <div>
-                      <h3 className="font-medium">{note.title}</h3>
-                      <p className="text-gray-500 text-sm mt-1">
-                        {note.content}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => confirmDelete(note._id)}
-                      className="text-gray-400 hover:text-red-600 cursor-pointer"
-                    >
-                      <IoTrashOutline size={24} />
-                    </button>
+            {loading ? (
+              "Loading..."
+            ) : notes.length === 0 ? (
+              <div className="text-gray-500 text-sm py-2 text-center">
+                <p>No notes found</p>
+              </div>
+            ) : (
+              notes.map((note) => (
+                <div
+                  key={note._id}
+                  className="bg-white rounded-xl shadow-md p-4 flex justify-between items-center"
+                >
+                  <div>
+                    <h3 className="font-medium">{note.title}</h3>
+                    <p className="text-gray-500 text-sm mt-1">{note.content}</p>
                   </div>
-                ))}
+                  <button
+                    onClick={() => confirmDelete(note._id)}
+                    className="text-gray-400 hover:text-red-600 cursor-pointer"
+                  >
+                    <IoTrashOutline size={24} />
+                  </button>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </main>
