@@ -1,6 +1,6 @@
 # Highway Delite MERN Stack Project
 
-A modern, full-stack MERN (MongoDB, Express, React, Node.js) application featuring OTP-based authentication, protected/public routes, global error handling, and a professional, responsive UI. Built with TypeScript (backend & frontend), Redux Toolkit, Redux Persist, React Router, and Tailwind CSS.
+full-stack MERN (MongoDB, Express, React, Node.js) application featuring OTP-based authentication, protected/public routes, global error handling, and a professional, responsive UI. Built with TypeScript (backend & frontend), Redux Toolkit, Redux Persist, React Router, and Tailwind CSS.
 
 ---
 
